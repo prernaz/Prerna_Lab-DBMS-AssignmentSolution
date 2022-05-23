@@ -1,7 +1,7 @@
 -- Problem Statement
 -- An E-commerce website manages its data in the form of various tables.
--- 1) You are required to create tables for supplier,customer,
--- category,product,supplier_pricing,order,rating
+-- 1) we are required to create tables for supplier,customer,
+-- category, product, supplier_pricing, order, rating
 -- to store the data for the Ecommerce with the schema definition given
 
 create database if not exists order_directory;
@@ -34,7 +34,7 @@ PRO_DESC varchar(60),
 CAT_ID int not null,
 foreign key (CAT_ID) references category(CAT_ID)
 );
--- alter table product modify column PRO_DESC varchar(60);
+
 
 create table if not exists supplier_pricing (
 PRICING_ID int primary key,
@@ -45,7 +45,7 @@ foreign key (PRO_ID) references product (PRO_ID),
 foreign key (SUPP_ID) references supplier(SUPP_ID)
 -- unique key (PRO_ID,SUPP_ID)
 );
- drop table orderr;
+ 
 create table if not exists orderr (
 ORD_ID int primary key,
 ORD_AMOUNT int not null,
@@ -149,16 +149,6 @@ foreign key (ORD_ID) references orderr(ORD_ID)
  INSERT INTO rating VALUES(15,115,1);
  INSERT INTO rating VALUES(16,116,0);
   
--- ALTER TABLE supplier_pricing DROP FOREIGN KEY supplier_pricing_IBFK_2;
--- ALTER TABLE supplier_pricing ADD FOREIGN KEY product (PRO_ID) REFERENCES product (PRO_ID);
-
- -- select * from supplier;
--- select * from customer;
- -- select * from product;
--- select * from category;
--- select * from supplier_pricing;
--- select * from rating;
--- select * from orderr;
 
 -- 3) Display the total number of customers based on gender who have placed 
 --     orders of worth at least Rs.3000.
@@ -167,7 +157,7 @@ select cus_gender, count(cus_gender) from customer
 where cus_id in(select cus_id from orderr group by cus_id
 having sum(ord_amount) >=3000 )
 group by cus_gender;
--- order by cus_gender
+
 
 -- 4) Display all the orders along with product name ordered by a customer having Customer_Id=2
 
@@ -235,10 +225,3 @@ case when avg(rat_ratstars) = 5 then 'Excellent Service'
 
 
 
--- drop table rating;
--- drop table supplier_pricing;
--- drop table orderr;
--- drop table product;
--- drop table category;
--- drop table supplier;
--- drop table customer;
